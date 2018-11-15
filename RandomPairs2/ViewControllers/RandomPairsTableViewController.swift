@@ -9,34 +9,39 @@
 import UIKit
 
 class RandomPairsTableViewController: UITableViewController {
+    
+    var pairs = [[String]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        convertToDoubleArray()
  
     }
 
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Group \(section + 1)"
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return pairs.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return pairs[section].count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let person = pairs[indexPath.section][indexPath.row]
+        cell.textLabel?.text = person
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -46,17 +51,18 @@ class RandomPairsTableViewController: UITableViewController {
     }
     */
 
-    /*
+   
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let index = calculateIndex(index: indexPath)
+            RandomPairController.shared.remove(at: index)
+            convertToDoubleArray()
+            tableView.reloadData()
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -74,7 +80,42 @@ class RandomPairsTableViewController: UITableViewController {
     */
 
 
+    @IBAction func addButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Add Person", message: nil, preferredStyle: .alert)
+        alert.addTextField { (nameTextField) in
+            nameTextField.placeholder = "Enter a name..."
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            guard let nameTextField = alert.textFields?.first else {return}
+            guard let name = nameTextField.text, name != "" else {return}
+            
+            RandomPairController.shared.add(person: name)
+            
+            self.convertToDoubleArray()
+            self.tableView.reloadData()
+        }))
+        
+        present(alert, animated: true)
+    
+        
+    }
     
     
-
+    @IBAction func shuffleButtonTapped(_ sender: Any) {
+        
+        //shuffle players
+    }
+    
+    
+    func convertToDoubleArray(){
+        pairs = RandomPairController.shared.splitInPairs(array: RandomPairController.shared.people)
+    }
+    
+    func calculateIndex(index: IndexPath) -> Int {
+        print("❌ \(((index.section * 2) + index.row))")
+        return ((index.section * 2) + index.row)
+    }
+    
 }

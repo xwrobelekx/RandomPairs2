@@ -12,6 +12,7 @@
 		3BDAB8B2219DE00D003E01F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAB8B1219DE00D003E01F4 /* Assets.xcassets */; };
 		3BDAB8B5219DE00D003E01F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BDAB8B3219DE00D003E01F4 /* LaunchScreen.storyboard */; };
 		3BDAB8C0219DE054003E01F4 /* RandomPairsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAB8BF219DE054003E01F4 /* RandomPairsTableViewController.swift */; };
+		3BDAB8C4219DE208003E01F4 /* RandomPairController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDAB8C3219DE208003E01F4 /* RandomPairController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3BDAB8B4219DE00D003E01F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BDAB8B6219DE00D003E01F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BDAB8BF219DE054003E01F4 /* RandomPairsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPairsTableViewController.swift; sourceTree = "<group>"; };
+		3BDAB8C3219DE208003E01F4 /* RandomPairController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPairController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,8 @@
 		3BDAB8A9219DE00A003E01F4 /* RandomPairs2 */ = {
 			isa = PBXGroup;
 			children = (
+				3BDAB8C1219DE1EA003E01F4 /* Model */,
+				3BDAB8C2219DE1F0003E01F4 /* ModelController */,
 				3BDAB8BE219DE034003E01F4 /* ViewControllers */,
 				3BDAB8BD219DE02E003E01F4 /* UI */,
 				3BDAB8BC219DE025003E01F4 /* resources */,
@@ -86,6 +90,21 @@
 				3BDAB8BF219DE054003E01F4 /* RandomPairsTableViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3BDAB8C1219DE1EA003E01F4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3BDAB8C2219DE1F0003E01F4 /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				3BDAB8C3219DE208003E01F4 /* RandomPairController.swift */,
+			);
+			path = ModelController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +180,7 @@
 			files = (
 				3BDAB8C0219DE054003E01F4 /* RandomPairsTableViewController.swift in Sources */,
 				3BDAB8AB219DE00A003E01F4 /* AppDelegate.swift in Sources */,
+				3BDAB8C4219DE208003E01F4 /* RandomPairController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +328,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EAUJPVR66;
-				INFOPLIST_FILE = RandomPairs2/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RandomPairs2/resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EAUJPVR66;
-				INFOPLIST_FILE = RandomPairs2/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RandomPairs2/resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
