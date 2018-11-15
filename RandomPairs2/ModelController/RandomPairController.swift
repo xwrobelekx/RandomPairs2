@@ -53,10 +53,4 @@ class RandomPairController {
         masterarray.append(pair)
         return masterarray
     }
-    
-    
-
-    
-    
-    
 }

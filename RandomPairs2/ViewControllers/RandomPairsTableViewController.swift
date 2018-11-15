@@ -43,14 +43,6 @@ class RandomPairsTableViewController: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -64,21 +56,6 @@ class RandomPairsTableViewController: UITableViewController {
     }
     
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
 
     @IBAction func addButtonTapped(_ sender: Any) {
         let alert = UIAlertController(title: "Add Person", message: nil, preferredStyle: .alert)
@@ -90,31 +67,36 @@ class RandomPairsTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
             guard let nameTextField = alert.textFields?.first else {return}
             guard let name = nameTextField.text, name != "" else {return}
-            
             RandomPairController.shared.add(person: name)
-            
             self.convertToDoubleArray()
             self.tableView.reloadData()
         }))
-        
         present(alert, animated: true)
-    
-        
     }
     
     
     @IBAction func shuffleButtonTapped(_ sender: Any) {
-        
-        //shuffle players
+        if RandomPairController.shared.people.count > 1{
+            var temporaryArray = [String]()
+        for number in 0...(RandomPairController.shared.people.count - 1) {
+            
+            let randomNumber : Int = Int(arc4random_uniform(UInt32(RandomPairController.shared.people.count)))
+            let element = RandomPairController.shared.people.remove(at: randomNumber)
+                temporaryArray.append(element)
+        }
+       RandomPairController.shared.people = temporaryArray
+            convertToDoubleArray()
+            tableView.reloadData()
+        }
     }
     
-    
+    ///converts regular array into an array of arrays of pairs
     func convertToDoubleArray(){
         pairs = RandomPairController.shared.splitInPairs(array: RandomPairController.shared.people)
     }
     
+    ///calculates index based on sections and rows
     func calculateIndex(index: IndexPath) -> Int {
-        print("❌ \(((index.section * 2) + index.row))")
         return ((index.section * 2) + index.row)
     }
     
